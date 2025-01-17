@@ -9,48 +9,47 @@ package pkg2210020043_uji;
  * @author LENOVO
  */
 public class Penjualan {
-    public class penjualan {
 
-    private String no_transaksi;
+    private String noTransaksi;
     private String kodeBarang;
-    private String tgl_transaksi;
-    private String nama_barang;
+    private String tglTransaksi;
+    private String namaBarang;
     private int stok;
     private double harga;
     private int jumlah;
     private double total;
-    private String kd_member;
+    private String kdMember;
     private String nama;
     private double diskon;
-    private double total_diskon;
+    private double totalDiskon;
     private double bayar;
     private double kembali;
 
     // Constructor
-    public penjualan(String noTransaksi, String kodeBarang, String tglTransaksi, String namaBarang, int stok, double harga, int jumlah, double total, String kdMember, String nama, double diskon, double totalDiskon, double bayar, double kembali) {
-        this.no_transaksi = noTransaksi;
+    public Penjualan(String noTransaksi, String kodeBarang, String tglTransaksi, String namaBarang, int stok, double harga, int jumlah, double total, String kdMember, String nama, double diskon, double totalDiskon, double bayar, double kembali) {
+        this.noTransaksi = noTransaksi;
         this.kodeBarang = kodeBarang;
-        this.tgl_transaksi = tglTransaksi;
-        this.nama_barang = namaBarang;
+        this.tglTransaksi = tglTransaksi;
+        this.namaBarang = namaBarang;
         this.stok = stok;
         this.harga = harga;
         this.jumlah = jumlah;
         this.total = total;
-        this.kd_member = kdMember;
+        this.kdMember = kdMember;
         this.nama = nama;
         this.diskon = diskon;
-        this.total_diskon = totalDiskon;
+        this.totalDiskon = totalDiskon;
         this.bayar = bayar;
         this.kembali = kembali;
     }
 
     // Getters and Setters
     public String getNoTransaksi() {
-        return no_transaksi;
+        return noTransaksi;
     }
 
     public void setNoTransaksi(String noTransaksi) {
-        this.no_transaksi = noTransaksi;
+        this.noTransaksi = noTransaksi;
     }
 
     public String getKodeBarang() {
@@ -62,19 +61,19 @@ public class Penjualan {
     }
 
     public String getTglTransaksi() {
-        return tgl_transaksi;
+        return tglTransaksi;
     }
 
     public void setTglTransaksi(String tglTransaksi) {
-        this.tgl_transaksi = tglTransaksi;
+        this.tglTransaksi = tglTransaksi;
     }
 
     public String getNamaBarang() {
-        return nama_barang;
+        return namaBarang;
     }
 
     public void setNamaBarang(String namaBarang) {
-        this.nama_barang = namaBarang;
+        this.namaBarang = namaBarang;
     }
 
     public int getStok() {
@@ -110,11 +109,11 @@ public class Penjualan {
     }
 
     public String getKdMember() {
-        return kd_member;
+        return kdMember;
     }
 
     public void setKdMember(String kdMember) {
-        this.kd_member = kdMember;
+        this.kdMember = kdMember;
     }
 
     public String getNama() {
@@ -134,16 +133,26 @@ public class Penjualan {
     }
 
     public double getTotalDiskon() {
-        return total_diskon;
+        return totalDiskon;
     }
 
     public void setTotalDiskon(double totalDiskon) {
-        this.total_diskon = totalDiskon;
+        this.totalDiskon = totalDiskon;
     }
 
     public double getBayar() {
         return bayar;
     }
+
+    public void setBayar(double bayar) {
+        this.bayar = bayar;
     }
-    
+
+    public double getKembali() {
+        return kembali;
+    }
+
+    public void setKembali(double kembali) {
+        this.kembali = kembali;
+    }
 }
