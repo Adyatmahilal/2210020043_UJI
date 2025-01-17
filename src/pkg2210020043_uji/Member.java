@@ -9,62 +9,58 @@ package pkg2210020043_uji;
  * @author LENOVO
  */
 public class Member {
-    public class member {
 
-    private String kd_member;
-    private String nama;
-    private String telepon;
-    private String alamat;
+    private String memberId;
+    private String name;
+    private String email;
+    private String phoneNumber;
 
     // Constructor
-    public member(String kdMember, String nama, String telepon, String alamat) {
-        this.kd_member = kdMember;
-        this.nama = nama;
-        this.telepon = telepon;
-        this.alamat = alamat;
+    public Member(String memberId, String name, String email, String phoneNumber) {
+        this.memberId = memberId;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     // Getters and Setters
-    public String getKdMember() {
-        return kd_member;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setKdMember(String kdMember) {
-        this.kd_member = kdMember;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
-    public String getNama() {
-        return nama;
+    public String getName() {
+        return name;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTelepon() {
-        return telepon;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelepon(String telepon) {
-        this.telepon = telepon;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    // Method to display data
-    public void displayData() {
-        System.out.println("Kode Member: " + kd_member);
-        System.out.println("Nama: " + nama);
-        System.out.println("Telepon: " + telepon);
-        System.out.println("Alamat: " + alamat);
+    // Method to display member information
+    public void displayMemberInfo() {
+        System.out.println("Member ID: " + memberId);
+        System.out.println("Name: " + name);
+        System.out.println("Email: " + email);
+        System.out.println("Phone Number: " + phoneNumber);
     }
-    }
-    
 }
-    
