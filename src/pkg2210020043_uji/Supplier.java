@@ -9,53 +9,47 @@ package pkg2210020043_uji;
  * @author LENOVO
  */
 public class Supplier {
-
-    private String kd_supplier;
-    private String perusahaan;
-    private String nama_barang;
+    
+    private String supplierId;
+    private String companyName;
+    private String contactInfo;
 
     // Constructor
-    public Supplier(String kdSupplier, String perusahaan, String namaBarang) {
-        this.kd_supplier = kdSupplier;
-        this.perusahaan = perusahaan;
-        this.nama_barang = namaBarang;
+    public Supplier(String supplierId, String companyName, String contactInfo) {
+        this.supplierId = supplierId;
+        this.companyName = companyName;
+        this.contactInfo = contactInfo;
     }
 
     // Getters and Setters
-    public String getKdSupplier() {
-        return kd_supplier;
+    public String getSupplierId() {
+        return supplierId;
     }
 
-    public void setKdSupplier(String kdSupplier) {
-        this.kd_supplier = kdSupplier;
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
     }
 
-    public String getPerusahaan() {
-        return perusahaan;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setPerusahaan(String perusahaan) {
-        this.perusahaan = perusahaan;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getNamaBarang() {
-        return nama_barang;
+    public String getContactInfo() {
+        return contactInfo;
     }
 
-    public void setNamaBarang(String namaBarang) {
-        this.nama_barang = namaBarang;
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
     }
 
-    // Method to display data
-    public void displayData() {
-        System.out.println("kd_supplier: " + kd_supplier);
-        System.out.println("Perusahaan: " + perusahaan);
-        System.out.println("nama_barang: " + nama_barang);
-    }
-
-    public static void main(String[] args) {
-        // Contoh penggunaan
-        Supplier supplier1 = new Supplier("S001", "Supplier A", "CONVERSE 70S");
-        supplier1.displayData();
+    // Method to display supplier information
+    public void displaySupplierInfo() {
+        System.out.println("Supplier ID: " + supplierId);
+        System.out.println("Company Name: " + companyName);
+        System.out.println("Contact Info: " + contactInfo);
     }
 }
