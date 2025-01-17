@@ -9,24 +9,23 @@ package pkg2210020043_uji;
  * @author LENOVO
  */
 public class Pembelian {
-    public class pembelian {
 
-    private String no_transaksi;
-    private String kd_supplier;
+    private String noTransaksi;
+    private String kdSupplier;
     private String perusahaan;
-    private String nama_barang;
-    private String tgl_transaksi;
+    private String namaBarang;
+    private String tglTransaksi;
     private double harga;
     private int jumlah;
     private double total;
 
     // Constructor
-    public pembelian(String noTransaksi, String kdSupplier, String perusahaan, String namaBarang, String tglTransaksi, double harga, int jumlah, double total) {
-        this.no_transaksi = noTransaksi;
-        this.kd_supplier = kdSupplier;
+    public Pembelian(String noTransaksi, String kdSupplier, String perusahaan, String namaBarang, String tglTransaksi, double harga, int jumlah, double total) {
+        this.noTransaksi = noTransaksi;
+        this.kdSupplier = kdSupplier;
         this.perusahaan = perusahaan;
-        this.nama_barang = namaBarang;
-        this.tgl_transaksi = tglTransaksi;
+        this.namaBarang = namaBarang;
+        this.tglTransaksi = tglTransaksi;
         this.harga = harga;
         this.jumlah = jumlah;
         this.total = total;
@@ -34,19 +33,19 @@ public class Pembelian {
 
     // Getters and Setters
     public String getNoTransaksi() {
-        return no_transaksi;
+        return noTransaksi;
     }
 
     public void setNoTransaksi(String noTransaksi) {
-        this.no_transaksi = noTransaksi;
+        this.noTransaksi = noTransaksi;
     }
 
     public String getKdSupplier() {
-        return kd_supplier;
+        return kdSupplier;
     }
 
     public void setKdSupplier(String kdSupplier) {
-        this.kd_supplier = kdSupplier;
+        this.kdSupplier = kdSupplier;
     }
 
     public String getPerusahaan() {
@@ -58,19 +57,19 @@ public class Pembelian {
     }
 
     public String getNamaBarang() {
-        return nama_barang;
+        return namaBarang;
     }
 
     public void setNamaBarang(String namaBarang) {
-        this.nama_barang = namaBarang;
+        this.namaBarang = namaBarang;
     }
 
     public String getTglTransaksi() {
-        return tgl_transaksi;
+        return tglTransaksi;
     }
 
     public void setTglTransaksi(String tglTransaksi) {
-        this.tgl_transaksi = tglTransaksi;
+        this.tglTransaksi = tglTransaksi;
     }
 
     public double getHarga() {
@@ -99,14 +98,13 @@ public class Pembelian {
 
     // Method to display data
     public void displayData() {
-        System.out.println("No Transaksi: " + no_transaksi);
-        System.out.println("Kode Supplier: " + kd_supplier);
+        System.out.println("No Transaksi: " + noTransaksi);
+        System.out.println("Kode Supplier: " + kdSupplier);
         System.out.println("Perusahaan: " + perusahaan);
-        System.out.println("Nama Barang: " + nama_barang);
-        System.out.println("Tanggal Transaksi: " + tgl_transaksi);
+        System.out.println("Nama Barang: " + namaBarang);
+        System.out.println("Tanggal Transaksi: " + tglTransaksi);
         System.out.println("Harga: " + harga);
         System.out.println("Jumlah: " + jumlah);
         System.out.println("Total: " + total);
-    }
     }
 }
