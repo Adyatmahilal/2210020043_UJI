@@ -23,223 +23,63 @@ import javax.swing.JOptionPane;
 
 public class dbCRUD {
 
-    private Connection connect() {
-        String url = "jdbc:mysql://localhost:3306/datasepatu";
-        String user = "yourusername";
-        String password = "yourpassword";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
+    // JDBC Database URL, Username and Password
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/yourdatabase";
+    private static final String USER = "yourusername";
+    private static final String PASS = "yourpassword";
+
+    // Method to establish database connection
+    private Connection connect() throws SQLException {
+        return DriverManager.getConnection(DB_URL, USER, PASS);
     }
 
-    // Duplicate key check
-    public boolean duplicateKey(String tableName, String columnName, String value) {
-        boolean isDuplicate = false;
-        String query = "SELECT COUNT(*) FROM " + tableName + " WHERE " + columnName + " = '" + value + "'";
-
-        try (Connection conn = this.connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-            if (rs.next()) {
-                isDuplicate = rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return isDuplicate;
-    }
-
-    // CRUD operations for datasepatu
-    public void Simpandatasepatu(datasepatu sepatu) {
-        try {
-            if (duplicateKey("datasepatu", "KodeBarang", sepatu.getKodeBarang())) {
-                JOptionPane.showMessageDialog(null, "Kode barang sudah terdaftar");
-            } else {
-                String SQL = "INSERT INTO datasepatu (KodeBarang, nama_barang, stok, harga_beli, harga_jual) VALUES (?, ?, ?, ?, ?)";
-                try (Connection conn = this.connect();
-                     PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-                    pstmt.setString(1, sepatu.getKodeBarang());
-                    pstmt.setString(2, sepatu.getNamaBarang());
-                    pstmt.setInt(3, sepatu.getStok());
-                    pstmt.setDouble(4, sepatu.getHargaBeli());
-                    pstmt.setDouble(5, sepatu.getHargaJual());
-                    pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan");
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    public void updateDatasepatu(datasepatu sepatu) {
-        String SQL = "UPDATE datasepatu SET nama_barang = ?, stok = ?, harga_beli = ?, harga_jual = ? WHERE KodeBarang = ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setString(1, sepatu.getNamaBarang());
-            pstmt.setInt(2, sepatu.getStok());
-            pstmt.setDouble(3, sepatu.getHargaBeli());
-            pstmt.setDouble(4, sepatu.getHargaJual());
-            pstmt.setString(5, sepatu.getKodeBarang());
+    // Create operation
+    public void insertMember(Member member) {
+        String query = "INSERT INTO members (memberId, name, email, phoneNumber) VALUES (?, ?, ?, ?)";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, member.getMemberId());
+            pstmt.setString(2, member.getName());
+            pstmt.setString(3, member.getEmail());
+            pstmt.setString(4, member.getPhoneNumber());
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Diperbarui");
+            System.out.println("Member inserted successfully.");
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            e.printStackTrace();
         }
     }
 
-    public void deleteDatasepatu(String kodeBarang) {
-        String SQL = "DELETE FROM datasepatu WHERE KodeBarang = ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setString(1, kodeBarang);
-            pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
-        } catch (SQLException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    public void selectAllDatasepatu() {
-        String SQL = "SELECT * FROM datasepatu";
-        try (Connection conn = this.connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL)) {
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
+    // Read operation
+    public void getMember(String memberId) {
+        String query = "SELECT * FROM members WHERE memberId = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, memberId);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
+                System.out.println("Member ID: " + rs.getString("memberId"));
+                System.out.println("Name: " + rs.getString("name"));
+                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Phone Number: " + rs.getString("phoneNumber"));
             }
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            e.printStackTrace();
         }
     }
 
-    // CRUD operations for member
-    public void SimpanMember(member member) {
-        try {
-            if (duplicateKey("member", "kd_member", member.getKdMember())) {
-                JOptionPane.showMessageDialog(null, "Kode member sudah terdaftar");
-            } else {
-                String SQL = "INSERT INTO member (kd_member, nama, telepon, alamat) VALUES (?, ?, ?, ?)";
-                try (Connection conn = this.connect();
-                     PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-                    pstmt.setString(1, member.getKdMember());
-                    pstmt.setString(2, member.getNama());
-                    pstmt.setString(3, member.getTelepon());
-                    pstmt.setString(4, member.getAlamat());
-                    pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan");
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    public void updateMember(member member) {
-        String SQL = "UPDATE member SET nama = ?, telepon = ?, alamat = ? WHERE kd_member = ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setString(1, member.getNama());
-            pstmt.setString(2, member.getTelepon());
-            pstmt.setString(3, member.getAlamat());
-            pstmt.setString(4, member.getKdMember());
+    // Update operation
+    public void updateMember(Member member) {
+        String query = "UPDATE members SET name = ?, email = ?, phoneNumber = ? WHERE memberId = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, member.getName());
+            pstmt.setString(2, member.getEmail());
+            pstmt.setString(3, member.getPhoneNumber());
+            pstmt.setString(4, member.getMemberId());
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Diperbarui");
+            System.out.println("Member updated successfully.");
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            e.printStackTrace();
         }
     }
-
-    public void deleteMember(String kdMember) {
-        String SQL = "DELETE FROM member WHERE kd_member = ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setString(1, kdMember);
-            pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
-        } catch (SQLException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    public void selectAllMember() {
-        String SQL = "SELECT * FROM member";
-        try (Connection conn = this.connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL)) {
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
-            }
-        } catch (SQLException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    // CRUD operations for pembelian
-    public void SimpanPembelian(pembelian pembelian) {
-        try {
-            if (duplicateKey("pembelian", "no_transaksi", pembelian.getNoTransaksi())) {
-                JOptionPane.showMessageDialog(null, "No transaksi sudah terdaftar");
-            } else {
-                String SQL = "INSERT INTO pembelian (no_transaksi, kd_supplier, perusahaan, nama_barang, tgl_transaksi, harga, jumlah, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                try (Connection conn = this.connect();
-                     PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-                    pstmt.setString(1, pembelian.getNoTransaksi());
-                    pstmt.setString(2, pembelian.getKdSupplier());
-                    pstmt.setString(3, pembelian.getPerusahaan());
-                    pstmt.setString(4, pembelian.getNamaBarang());
-                    pstmt.setString(5, pembelian.getTglTransaksi());
-                    pstmt.setDouble(6, pembelian.getHarga());
-                    pstmt.setInt(7, pembelian.getJumlah());
-                    pstmt.setDouble(8, pembelian.getTotal());
-                    pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan");
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    public void updatePembelian(pembelian pembelian) {
-        String SQL = "UPDATE pembelian SET kd_supplier = ?, perusahaan = ?, nama_barang = ?, tgl_transaksi = ?, harga = ?, jumlah = ?, total = ? WHERE no_transaksi = ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setString(1, pembelian.getKdSupplier());
-            pstmt.setString(2, pembelian.getPerusahaan());
-            pstmt.setString(3, pembelian.getNamaBarang());
-            pstmt.setString(4, pembelian.getTglTransaksi());
-            pstmt.setDouble(5, pembelian.getHarga());
-            pstmt.setInt(6, pembelian.getJumlah());
-            pstmt.setDouble(7, pembelian.getTotal());
-            pstmt.setString(8, pembelian.getNoTransaksi());
-            pstmt.executeUpdate();
-            
-        }
-        
-    }
-
-    void selectAllPembelian() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-}
+}    
