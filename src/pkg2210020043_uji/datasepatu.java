@@ -12,21 +12,20 @@ import java.awt.*;
  *
  * @author LENOVO
  */
+
 public class datasepatu {
 
     private String kodeBarang;
-    private String nama_barang;
-    private int stok;
-    private double harga_beli;
-    private double harga_jual;
+    private String namaBarang;
+    private int ukuran;
+    private double harga;
 
     // Constructor
-    public datasepatu(String kodeBarang, String namaBarang, int stok, double hargaBeli, double hargaJual) {
+    public datasepatu(String kodeBarang, String namaBarang, int ukuran, double harga) {
         this.kodeBarang = kodeBarang;
-        this.nama_barang = namaBarang;
-        this.stok = stok;
-        this.harga_beli = hargaBeli;
-        this.harga_jual = hargaJual;
+        this.namaBarang = namaBarang;
+        this.ukuran = ukuran;
+        this.harga = harga;
     }
 
     // Getters and Setters
@@ -39,43 +38,34 @@ public class datasepatu {
     }
 
     public String getNamaBarang() {
-        return nama_barang;
+        return namaBarang;
     }
 
     public void setNamaBarang(String namaBarang) {
-        this.nama_barang = namaBarang;
+        this.namaBarang = namaBarang;
     }
 
-    public int getStok() {
-        return stok;
+    public int getUkuran() {
+        return ukuran;
     }
 
-    public void setStok(int stok) {
-        this.stok = stok;
+    public void setUkuran(int ukuran) {
+        this.ukuran = ukuran;
     }
 
-    public double getHargaBeli() {
-        return harga_beli;
+    public double getHarga() {
+        return harga;
     }
 
-    public void setHargaBeli(double hargaBeli) {
-        this.harga_beli = hargaBeli;
+    public void setHarga(double harga) {
+        this.harga = harga;
     }
 
-    public double getHargaJual() {
-        return harga_jual;
-    }
-
-    public void setHargaJual(double hargaJual) {
-        this.harga_jual = hargaJual;
-    }
-
-    // Method to display data
+    // Method to display shoe data
     public void displayData() {
         System.out.println("Kode Barang: " + kodeBarang);
-        System.out.println("Nama Barang: " + nama_barang);
-        System.out.println("Stok: " + stok);
-        System.out.println("Harga Beli: " + harga_beli);
-        System.out.println("Harga Jual: " + harga_jual);
+        System.out.println("Nama Barang: " + namaBarang);
+        System.out.println("Ukuran: " + ukuran);
+        System.out.println("Harga: " + harga);
     }
 }
